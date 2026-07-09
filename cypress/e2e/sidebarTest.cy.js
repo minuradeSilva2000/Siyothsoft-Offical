@@ -144,7 +144,31 @@ describe('Sidebar Navigation Test Suite', () => {
     cy.contains('Manage Lookup', { timeout: 10000 }).should('be.visible')
 
   })
-  
+  it('should navigate to Print Type page via sidebar Print Type text', () => {
 
+    // Open sidebar
+    cy.get('.navbar__hamburger', { timeout: 10000 }).click()
+    cy.get('.sidebar').should('be.visible')
+
+    // Click Job Plan via sidebar item text
+    cy.get('.sidebar__item-text').contains('Print Type').click()
+
+    // Verify Job Plan page is displayed
+    cy.contains('Manage Print Types', { timeout: 10000 }).should('be.visible')
+
+  })
+   it('should navigate to Job Finishing List page via sidebar Job Finishing List text', () => {
+
+    // Open sidebar
+    cy.get('.navbar__hamburger', { timeout: 10000 }).click()
+    cy.get('.sidebar').should('be.visible')
+
+    // Click Job Plan via sidebar item text
+    cy.get('.sidebar__item-text').contains('Job Card').click()
+
+    // Verify Job Plan page is displayed
+    cy.contains('Job Finishing List', { timeout: 10000 }).should('be.visible')
+
+  })
    
  })
