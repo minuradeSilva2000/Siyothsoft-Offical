@@ -166,6 +166,8 @@ it('clcik the close button then from is closed',()=>{
   cy.get('.modal__close').click()
   cy.get('form.customer-form').should('not.exist')
  })
+
+
  it('click add button then fill form details and click save button',()=>{
   cy.on('uncaught:exception', () => false)
   cy.visit('https://devflexi.siyothsoft.com/customers')
@@ -182,6 +184,26 @@ it('clcik the close button then from is closed',()=>{
   cy.wait('@saveCustomer').then((interception) => {
     expect(interception.response.statusCode).to.eq(200)
   })
-  
+})
+
+  it('check Next button is working',()=>{
+    cy.visit('https://devflexi.siyothsoft.com/customers')
+
+    cy.contains('button', 'View').should('be.visible').click()
+
+
+    cy.get('table.data-table tbody tr', { timeout: 10000 }).should('have.length.greaterThan', 0)
+    cy.contains('button', 'Next').should('not.be.disabled').click()
+    
+    cy.get('table.data-table tbody tr', { timeout: 10000 }).should('have.length.greaterThan', 0)
+  })
+  it('check Previous button is working',()=>{
+   cy.visit('https://devflexi.siyothsoft.com/customers')
+
+    cy.contains('button', 'View').should('be.visible').click()
+    cy.get('table.data-table tbody tr', { timeout: 10000 }).should('have.length.greaterThan', 0)
+    cy.contains('button', 'Next').click()
+    cy.contains('button', 'Prev').should('be.visible').and('not.be.disabled').click()
+    cy.get('table.data-table tbody tr', { timeout: 10000 }).should('have.length.greaterThan', 0)
  })
 })
