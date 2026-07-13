@@ -168,23 +168,7 @@ it('clcik the close button then from is closed',()=>{
  })
 
 
- it('click add button then fill form details and click save button',()=>{
-  cy.on('uncaught:exception', () => false)
-  cy.visit('https://devflexi.siyothsoft.com/customers')
-  cy.contains('button', 'Add').should('be.visible').click()
-  cy.get('form.customer-form').should('be.visible')
-  cy.get('form.customer-form').find('input').eq(0).type('A00051', { force: true })
-  cy.get('form.customer-form').find('input').eq(1).type('ALOKOZAY TEA INTERNATIONAL LTD-UAE', { force: true })
-  cy.get('form.customer-form select').first().select('1')
-  cy.intercept('POST', '**/customer**', {
-    statusCode: 200,
-    body: { message: 'Customer created successfully' }
-  }).as('saveCustomer')
-  cy.contains('button', 'Save').should('be.visible').click()
-  cy.wait('@saveCustomer').then((interception) => {
-    expect(interception.response.statusCode).to.eq(200)
-  })
-})
+ 
 
   it('check Next button is working',()=>{
     cy.visit('https://devflexi.siyothsoft.com/customers')
@@ -206,4 +190,25 @@ it('clcik the close button then from is closed',()=>{
     cy.contains('button', 'Prev').should('be.visible').and('not.be.disabled').click()
     cy.get('table.data-table tbody tr', { timeout: 10000 }).should('have.length.greaterThan', 0)
  })
+ it('click add button then fill form details and click save button',()=>{
+  cy.on('uncaught:exception', () => false)
+  cy.visit('https://devflexi.siyothsoft.com/customers')
+  cy.contains('button', 'Add').should('be.visible').click()
+  cy.get('form.customer-form').should('be.visible')
+  cy.get('form.customer-form').find('input').eq(0).type('A00051', { force: true })
+  cy.get('form.customer-form').find('input').eq(1).type('ALOKOZAY TEA INTERNATIONAL LTD-UAE', { force: true })
+  cy.get('form.customer-form select').first().select('1')
+  cy.intercept('POST', '**/customer**', {
+    statusCode: 200,
+    body: { message: 'Customer created successfully' }
+  }).as('saveCustomer')
+  cy.contains('button', 'Save').should('be.visible').click()
+  cy.wait('@saveCustomer').then((interception) => {
+    expect(interception.response.statusCode).to.eq(200)
+  })
+
+
+ })
+
+
 })
