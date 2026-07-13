@@ -142,5 +142,18 @@ describe('Machine Module Test Suite', () => {
     cy.get('form.machine-detail__form select.form-select').eq(2).select('D2', { force: true })
     cy.contains('button', 'Close').should('be.visible').click()
   })
+    it('check the input fields are working fill input fields and click undo button', () => {
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).should('be.visible').select('10',{ force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).should('be.visible').select('12',{ force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).should('be.visible').select('D2',{ force: true })
+    cy.contains('button', 'Undo').should('be.visible').click()
+    cy.get('form.machine-detail__form input').first().should('have.value', '')
+    cy.get('form.machine-detail__form select.form-select').eq(0).should(($el) => { expect($el[0].selectedIndex).to.equal(0) })
+    cy.get('form.machine-detail__form select.form-select').eq(1).should(($el) => { expect($el[0].selectedIndex).to.equal(0) })
+    cy.get('form.machine-detail__form select.form-select').eq(2).should(($el) => { expect($el[0].selectedIndex).to.equal(0) })
+  })
  
 })
