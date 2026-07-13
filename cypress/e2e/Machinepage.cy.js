@@ -155,5 +155,34 @@ describe('Machine Module Test Suite', () => {
     cy.get('form.machine-detail__form select.form-select').eq(1).should(($el) => { expect($el[0].selectedIndex).to.equal(0) })
     cy.get('form.machine-detail__form select.form-select').eq(2).should(($el) => { expect($el[0].selectedIndex).to.equal(0) })
   })
+
+     it('check the input fields are working fill input fields and click save button', () => {
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form').should('be.visible')
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).should('be.visible').select('10',{ force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).should('be.visible').select('12',{ force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).should('be.visible').select('D2',{ force: true })
+    cy.contains('button', 'Save').should('be.visible').click()
+
+  })
+  it('check that the input fields work correctly, fill in the form fields, click the Save button, and verify successful navigation to the next page', () => {
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form').should('be.visible')
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).select('10', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).select('12', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).select('P', { force: true })
+    cy.contains('button', 'Save').should('be.visible').click()
+
+    cy.contains('Print Types', { timeout: 10000 }).click({ force: true })
+    cy.get('.machine-detail__slide.active').should('be.visible')
+
+     
+  })
+
  
 })
