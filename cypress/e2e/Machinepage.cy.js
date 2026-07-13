@@ -117,8 +117,17 @@ describe('Machine Module Test Suite', () => {
     cy.contains('button', 'View').should('be.visible').click()
 
     cy.get('table.data-table', { timeout: 10000 }).should('be.visible')
-    
+
     cy.contains('Model').should('exist').and('be.visible')
+
+  })
+   it('click the add button check form should be visible', () => {
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+
+    cy.contains('button', 'Add').should('be.visible').click()
+    
+    cy.get('form.machine-detail__form').should('be.visible')
 
   })
 })
