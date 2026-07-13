@@ -58,6 +58,7 @@ describe('Machine Module Test Suite', () => {
 
     cy.contains('button', 'View').should('be.visible').click()
   })
+ 
 
     it('give input value input fields then click view button and after click reset button', () => {
 
@@ -76,5 +77,19 @@ describe('Machine Module Test Suite', () => {
     cy.get('select.form-select').should('have.value', '')
     
 
+  })
+   it('click next button then navigate next page', () => {
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.intercept('/api/machines*', {
+      statusCode: 200,
+      body: { data: [{ id:1 , machineId: 'M1', code: 'M1', colors: 4, model: 'G' }, { id: 2, machineId: 'M2', code: 'M2', colors: 2, model: 'F' }], recordsTotal: 15, recordsFiltered: 15, totalPages: 2, page: 1, limit: 10 }
+    }).as('machinesApi')
+    cy.contains('button', 'View').click()
+    cy.wait('@machinesApi', { timeout: 10000 })
+    cy.contains('button', 'Next', { timeout: 10000 }).should('be.visible').click()
+     cy.get('table.data-table tbody tr').should('have.length', 2)
+     cy.contains('M1').should('be.visible')
+     cy.contains('M2').should('be.visible')
+  
   })
 })
