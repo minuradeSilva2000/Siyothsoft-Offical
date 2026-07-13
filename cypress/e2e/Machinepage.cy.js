@@ -29,5 +29,11 @@ describe('Machine Module Test Suite', () => {
 
     cy.contains('Machine Id').should('exist').and('be.visible')
   })
+  it('check input fields are working fill input fields then click view button', () => {
 
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.get('input.input').first().type('M1')
+    cy.contains('button', 'View').should('be.visible').click()
+
+  })
 })
