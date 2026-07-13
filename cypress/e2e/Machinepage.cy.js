@@ -183,6 +183,40 @@ describe('Machine Module Test Suite', () => {
 
      
   })
+    it('check that the input fields work correctly, fill in the form fields, click the Save button, and verify successful navigation to the next page then click X icon', () => {
 
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form').should('be.visible')
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).select('10', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).select('12', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).select('P', { force: true })
+    cy.contains('button', 'Save').should('be.visible').click()
+
+    cy.contains('Print Types', { timeout: 10000 }).click({ force: true })
+    cy.get('.machine-detail__slide.active').should('be.visible')
+    cy.xpath('/html/body/div/div/main/div/div[5]/div/div[1]/button').click()
+    cy.url().should('include', '/machines')
+
+     
+  })
+   it('Verify the Add form is displayed, accepts valid input, saves successfully, and navigates to the next page', () => {
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form').should('be.visible')
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).select('10', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).select('12', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).select('P', { force: true })
+    cy.contains('button', 'Save').should('be.visible').click()
+
+    cy.contains('Print Types', { timeout: 10000 }).click({ force: true })
+    cy.get('.machine-detail__slide.active').should('be.visible')
+    cy.get('button.machine-detail__pt-add').should('be.visible').click();
+     cy.url().should('include', '/machines');
+     cy.get('.machine-detail__slide.active').should('be.visible');
+  })
  
 })
