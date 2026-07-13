@@ -34,16 +34,27 @@ describe('Machine Module Test Suite', () => {
     cy.visit('https://devflexi.siyothsoft.com/machines')
 
     cy.get('input.input').first().type('M1')
-    
+
     cy.contains('button', 'View').should('be.visible').click()
 
   })
   it('give values all input fields and click view button', () => {
+
     cy.visit('https://devflexi.siyothsoft.com/machines')
 
     cy.get('input.input').first().type('M1')
 
     cy.get('select.form-select').eq(0).should('be.visible').select('G')
+
+    cy.contains('button', 'View').should('be.visible').click()
+  })
+  it('give values all input fields and click view button with different values', () => {
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+
+    cy.get('input.input').first().type('P3')
+    
+    cy.get('select.form-select').eq(0).should('be.visible').select('Y')
 
     cy.contains('button', 'View').should('be.visible').click()
   })
