@@ -218,5 +218,49 @@ describe('Machine Module Test Suite', () => {
      cy.url().should('include', '/machines');
      cy.get('.machine-detail__slide.active').should('be.visible');
   })
- 
+  it('Verify the Add form is displayed, accepts valid input, saves successfully, and navigates to the next page', () => {
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form').should('be.visible')
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).select('10', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).select('12', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).select('P', { force: true })
+    cy.contains('button', 'Save').should('be.visible').click()
+
+    cy.contains('Print Types', { timeout: 10000 }).click({ force: true })
+    cy.get('.machine-detail__slide.active').should('be.visible')
+    cy.get('button.machine-detail__pt-add').should('be.visible').click();
+     cy.url().should('include', '/machines');
+     cy.get('.machine-detail__slide.active').should('be.visible');
+  })
+
+  it('Verify the Add form is displayed, accepts valid input, saves successfully, and navigates to the next page', () => {
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form').should('be.visible')
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).select('10', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).select('12', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).select('P', { force: true })
+    cy.contains('button', 'Save').should('be.visible').click()
+
+    cy.contains('Print Types', { timeout: 10000 }).click({ force: true })
+    cy.get('.machine-detail__slide.active').should('be.visible')
+    cy.get('button.machine-detail__pt-add').should('be.visible').click();
+     cy.url().should('include', '/machines');
+     cy.get('.machine-detail__slide.active').should('be.visible');
+     cy.get('form.machine-detail__pt-form select.form-select').eq(0).select('ALTA MART',{force:true})
+     cy.get('form.machine-detail__pt-form input[name="ratePh"]').type('100')
+     cy.get('form.machine-detail__pt-form input[name="minQty"]').type('90')
+     cy.get('.machine-detail__pt-form').contains('button', 'Save').click({force:true});
+     cy.get('.machine-detail__slide.active table tbody tr', { timeout: 10000 }).should('have.length.greaterThan', 0)
+     cy.get('.machine-detail__slide.active table').contains('ALTA MART').should('be.visible')
+     cy.get('.machine-detail__slide.active table').contains('100').should('be.visible')
+     cy.get('.machine-detail__slide.active table').contains('90').should('be.visible')
+
+
+  })
 })
