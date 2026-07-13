@@ -108,4 +108,17 @@ describe('Machine Module Test Suite', () => {
     cy.contains('button', 'Next', { timeout: 10000 }).should('be.visible').click()
     cy.contains('button', 'Prev', { timeout: 10000 }).should('be.visible').click()
   })
+    it('fill one input field', () => {
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+
+    cy.get('select.form-select').should('be.visible').select('G')
+
+    cy.contains('button', 'View').should('be.visible').click()
+
+    cy.get('table.data-table', { timeout: 10000 }).should('be.visible')
+    
+    cy.contains('Model').should('exist').and('be.visible')
+
+  })
 })
