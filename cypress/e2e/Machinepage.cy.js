@@ -75,9 +75,10 @@ describe('Machine Module Test Suite', () => {
     cy.get('input.input').should('have.value', '')
 
     cy.get('select.form-select').should('have.value', '')
-    
+    cy.get('table.data-table tbody tr').should('have.length', 1)
 
   })
+
    it('click next button then navigate next page', () => {
 
     cy.visit('https://devflexi.siyothsoft.com/machines')
@@ -126,8 +127,20 @@ describe('Machine Module Test Suite', () => {
     cy.visit('https://devflexi.siyothsoft.com/machines')
 
     cy.contains('button', 'Add').should('be.visible').click()
-    
+
     cy.get('form.machine-detail__form').should('be.visible')
 
   })
+   it('check the input fields are working fill input fields and click cancel button', () => {
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form').should('be.visible')
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).select('10', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).select('12', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).select('D2', { force: true })
+    cy.contains('button', 'Close').should('be.visible').click()
+  })
+ 
 })
