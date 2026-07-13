@@ -32,8 +32,19 @@ describe('Machine Module Test Suite', () => {
   it('check input fields are working fill input fields then click view button', () => {
 
     cy.visit('https://devflexi.siyothsoft.com/machines')
+
     cy.get('input.input').first().type('M1')
+    
     cy.contains('button', 'View').should('be.visible').click()
 
+  })
+  it('give values all input fields and click view button', () => {
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+
+    cy.get('input.input').first().type('M1')
+
+    cy.get('select.form-select').eq(0).should('be.visible').select('G')
+
+    cy.contains('button', 'View').should('be.visible').click()
   })
 })
