@@ -291,6 +291,7 @@ describe('Machine Module Test Suite', () => {
      cy.url().should('include', '/machines')
      
   })
+  // Verify that a new machine can be created successfully, a print type can be added, and the saved data is displayed correctly 
   it('Verify successful creation of a Machine, addition of a Print Type, and reopening of the Add Print Type form', () => {
 
     cy.visit('https://devflexi.siyothsoft.com/machines')
