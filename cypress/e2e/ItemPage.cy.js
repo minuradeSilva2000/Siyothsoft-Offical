@@ -50,6 +50,12 @@ it('check input fields are fill values both input fields are working',()=>{
    cy.get('table.data-table', { timeout: 15000 }).should('be.visible')
    cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
   
+ })
+  it('give  values  one input feild and click view button',()=>{
+    cy.get('input#itemDesc').should('be.visible').type('1 R 0714 FILTER FUEL')
+    cy.contains('button','View').should('be.visible').click()
+    cy.get('table.data-table', { timeout: 15000 }).should('be.visible')
+    cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
   })
 
 
