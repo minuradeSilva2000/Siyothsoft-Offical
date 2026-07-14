@@ -30,4 +30,16 @@ describe('Item page Navigation Test Suite', () => {
   cy.get('table.data-table thead th').eq(5).should('have.text', 'Status')
  })
  
+ it('click view button then display table with records', () => {
+
+  cy.contains('button', 'View').should('be.visible').click()
+
+  cy.get('table.data-table', { timeout: 15000 }).should('be.visible')
+
+  cy.contains('No data available', { timeout: 5000 }).should('not.exist')
+
+  cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
+})
+
+
 })
