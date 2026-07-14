@@ -100,4 +100,23 @@ it('chcek previous button is working then navigate previous page',()=>{
   cy.get('.item-detail__form, .item-form-modal, form.item-form', { timeout: 10000 }).should('be.visible')
  })
 
+ it('check input fields are working  fill input fields and click cancel button',()=>{
+
+  cy.visit('https://devflexi.siyothsoft.com/items')
+  cy.contains('button','Add').should('be.visible').click()
+  cy.get('.item-detail__form, .item-form-modal, form.item-form', { timeout: 10000 }).should('be.visible')
+  cy.get('input[name="itemCode"]').should('be.visible').type('CN-CHMGENRL-00000121')
+  cy.get('input[name="itemDesc"]').should('be.visible').type('1R03678YTU 456G H IHLILGH')
+  cy.get('select[name="colors"]').eq(0).should('be.visible').select('10')
+  cy.get('select[name="sides"]').eq(0).should('be.visible').select('3')
+  cy.get('select[name="printTypeId"]').eq(0).should('be.visible').select('ALTA MART')
+  cy.get('select[name="status"]').eq(0).should('be.visible').select('I')
+  cy.get('select[name="meshSize"]').eq(0).should('be.visible').select(1)
+  cy.get('select[name="threadLength"]').eq(0).should('be.visible').select(1)
+  cy.get('input[name="pitch"]').should('be.visible').type('1000')
+  cy.get('input[type="checkbox"]').click().should('be.checked')
+  cy.contains('button','Cancel').should('be.visible').click()
+
+ })
+
 })
