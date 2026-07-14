@@ -320,4 +320,41 @@ describe('Machine Module Test Suite', () => {
      cy.url().should('include', '/machines')
      
   })
+  it('verify click id then input field are visible with correct values',()=>{
+
+    cy.visit('https://devflexi.siyothsoft.com/machines')
+    cy.contains('button', 'Add').should('be.visible').click()
+    cy.get('form.machine-detail__form').should('be.visible')
+    cy.get('form.machine-detail__form input').first().type('M7')
+    cy.get('form.machine-detail__form select.form-select').eq(0).select('10', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(1).select('12', { force: true })
+    cy.get('form.machine-detail__form select.form-select').eq(2).select('P', { force: true })
+    cy.contains('button', 'Save').should('be.visible').click()
+
+    cy.contains('Print Types', { timeout: 10000 }).click({ force: true })
+    cy.get('.machine-detail__slide.active').should('be.visible')
+    cy.get('button.machine-detail__pt-add').should('be.visible').click();
+     cy.url().should('include', '/machines');
+     cy.get('.machine-detail__slide.active').should('be.visible');
+     cy.get('form.machine-detail__pt-form select.form-select').eq(0).select('ALTA MART',{force:true})
+     cy.get('form.machine-detail__pt-form input[name="ratePh"]').type('100')
+     cy.get('form.machine-detail__pt-form input[name="minQty"]').type('90')
+     cy.get('.machine-detail__pt-form').contains('button', 'Save').click({force:true});
+     cy.get('.machine-detail__slide.active table tbody tr', { timeout: 10000 }).should('have.length.greaterThan', 0)
+     cy.get('.machine-detail__slide.active table').contains('ALTA MART').should('be.visible')
+     cy.get('.machine-detail__slide.active table').contains('100').should('be.visible')
+     cy.get('.machine-detail__slide.active table').contains('90').should('be.visible')
+     cy.get('.machine-detail__slide.active').contains('button', 'Add').click({force:true});
+     cy.url().should('include', '/machines')
+     cy.get('.machine-detail__link').first().click({force:true})
+     cy.get('form.machine-detail__form', { timeout: 15000 }).should('exist')
+      cy.get('form.machine-detail__form input').first().should('have.value', 'M7')
+     cy.get('form.machine-detail__form select.form-select').eq(0).should(($el) => { expect($el[0].selectedIndex).to.equal(10) })
+     cy.get('form.machine-detail__pt-form input').first().should('have.value', '100')
+     cy.get('form.machine-detail__pt-form input').eq(1).should('have.value', '90')
+     
+
+     
+
+  })
 })
