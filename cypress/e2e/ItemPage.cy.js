@@ -57,7 +57,17 @@ it('check input fields are fill values both input fields are working',()=>{
     cy.get('table.data-table', { timeout: 15000 }).should('be.visible')
     cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
   })
+  it('clcik page button  then nvisible page related to page number',()=>{
+  cy.visit('https://devflexi.siyothsoft.com/items')
+  cy.contains('button', 'View').should('be.visible').click()
 
+  cy.get('table.data-table', { timeout: 15000 }).should('be.visible')
+  cy.contains('No data available', { timeout: 5000 }).should('not.exist')
+  cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
+
+  cy.contains('button', '6').should('be.visible').click()
+  cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
+ })
 
 
 })
