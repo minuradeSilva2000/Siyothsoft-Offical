@@ -18,6 +18,16 @@ describe('Item page Navigation Test Suite', () => {
     cy.contains('Items').click()
     cy.contains('Item View',{timeout:10000}).should('be.visible')
 
-})
+  })
+  it('should display the correct table headers', () => {
+  cy.contains('button', 'View').should('be.visible').click()
+  cy.get('table.data-table', { timeout: 15000 }).should('be.visible')
+  cy.get('table.data-table thead th').eq(0).should('have.text', 'Item Id')
+  cy.get('table.data-table thead th').eq(1).should('have.text', 'Item Code')
+  cy.get('table.data-table thead th').eq(2).should('have.text', 'Item Desc')
+  cy.get('table.data-table thead th').eq(3).should('have.text', 'Colors')
+  cy.get('table.data-table thead th').eq(4).should('have.text', 'Sides')
+  cy.get('table.data-table thead th').eq(5).should('have.text', 'Status')
+ })
  
 })
