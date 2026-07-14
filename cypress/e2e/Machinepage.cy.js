@@ -354,7 +354,7 @@ describe('Machine Module Test Suite', () => {
      cy.get('form.machine-detail__pt-form input').eq(1).should('have.value', '90')
      
 
-     
 
   })
+ 
 })
