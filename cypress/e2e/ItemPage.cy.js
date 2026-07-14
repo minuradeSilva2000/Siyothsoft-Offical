@@ -118,5 +118,22 @@ it('chcek previous button is working then navigate previous page',()=>{
   cy.contains('button','Cancel').should('be.visible').click()
 
  })
+ it('check input fields are working  fill input fields and click save button',()=>{
+  cy.visit('https://devflexi.siyothsoft.com/items')
+  cy.contains('button','Add').should('be.visible').click()
+  cy.get('.item-detail__form, .item-form-modal, form.item-form', { timeout: 10000 }).should('be.visible')
+  cy.get('input[name="itemCode"]').should('be.visible').type('CN-CHMGENRL-00000184')
+  cy.get('input[name="itemDesc"]').should('be.visible').type('MARICI BT COOL MINT TEA TAG - IMA TAG')
+  cy.get('select[name="colors"]').eq(0).should('be.visible').select('12')
+  cy.get('select[name="sides"]').eq(0).should('be.visible').select('2')
+  cy.get('select[name="printTypeId"]').eq(0).should('be.visible').select('DCK18EN.AL')
+  cy.get('select[name="status"]').eq(0).should('be.visible').select('A')
+  cy.get('select[name="meshSize"]').eq(0).should('be.visible').select(2)
+  cy.get('select[name="threadLength"]').eq(0).should('be.visible').select(0)
+  cy.get('input[name="pitch"]').should('be.visible').type('7900')
+  cy.get('input[type="checkbox"]').click().should('be.checked')
+  cy.contains('button','Save').should('be.visible').click()
+
+ })
 
 })
