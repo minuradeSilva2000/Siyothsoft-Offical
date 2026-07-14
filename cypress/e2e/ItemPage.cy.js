@@ -39,7 +39,19 @@ describe('Item page Navigation Test Suite', () => {
   cy.contains('No data available', { timeout: 5000 }).should('not.exist')
 
   cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
-})
+ })
+
+ 
+it('check input fields are fill values both input fields are working',()=>{
+
+   cy.get('input#itemCode').should('be.visible').type('CN-CHMGENRL-00000001')
+   cy.get('input#itemDesc').should('be.visible').type('1 R 0714 FILTER FUEL')
+   cy.contains('button','View').should('be.visible').click()
+   cy.get('table.data-table', { timeout: 15000 }).should('be.visible')
+   cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
+  
+  })
+
 
 
 })
