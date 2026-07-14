@@ -94,5 +94,10 @@ it('chcek previous button is working then navigate previous page',()=>{
   cy.get('table.data-table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
 })
 
+ it('check click add button then display item from',()=>{
+  cy.visit('https://devflexi.siyothsoft.com/items')
+  cy.contains('button','Add').should('be.visible').click()
+  cy.get('.item-detail__form, .item-form-modal, form.item-form', { timeout: 10000 }).should('be.visible')
+ })
 
 })
