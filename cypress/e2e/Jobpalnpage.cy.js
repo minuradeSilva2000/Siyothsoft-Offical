@@ -52,5 +52,14 @@ describe('Job Plan page Navigation Test Suite', () => {
     cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
 
   })
+  it('fill the job no ,diliverdate, production date input then dispay table with records',()=>{
+
+     cy.get('input[placeholder="Enter job no"]').should('be.visible').type('MO00008758')
+     cy.get('input[type="date"]').eq(0).should('be.visible').type('2012-10-22')
+     cy.get('input[type="date"]').eq(1).should('be.visible').type('2012-10-25')
+     cy.contains('button','Preview').should('be.visible').click()
+     cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
+
+  })
   
 })
