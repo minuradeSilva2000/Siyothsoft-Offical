@@ -61,5 +61,19 @@ describe('Job Plan page Navigation Test Suite', () => {
      cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
 
   })
+
+   it('verify allocate button are working',()=>{
+    cy.intercept('POST', '/api/job-plan/preview*', {
+      statusCode: 200,
+      body: [{jobNo:'MO00052281',description:'LEMON TEA ENV - MD20 ENV',customer:'STASSEN NATURAL FOODS (PVT) LTD',machine:'M5',colors:5,Qty:77250,allocQty:77250,uQty:0,jobDate:'2016-12-23',deliveryDate:'2016-12-23',optimalDate:'2016-12-22',actualDate:null,model:'G',printType:'MD20.ENV',mColors:8,days:0.1,slots:10,util:0,pyramidAttach:0}]
+    }).as('previewData')
+    cy.get('input[placeholder="Enter job no"]').should('be.visible').type('MO00052281')
+    cy.contains('button','Preview').should('be.visible').click()
+    cy.wait('@previewData')
+    cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
+    cy.get('.btn-allocate',{timeout:10000}).should('be.visible')
+  })
+
+  
   
 })
