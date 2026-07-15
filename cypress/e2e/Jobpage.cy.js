@@ -36,4 +36,12 @@ describe('Job page Navigation Test Suite', () => {
 
 
 })
+it('fill the Job No and click the view button then display table with records',()=>{
+    cy.get('input[name="jobNo"]').should('be.visible').type('MO00069337')
+    cy.contains('button','View').should('be.visible').click()
+    cy.get('table.data-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
+
+
+})
+
 })
