@@ -73,7 +73,39 @@ describe('Job Plan page Navigation Test Suite', () => {
     cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
     cy.get('.btn-allocate',{timeout:10000}).should('be.visible')
   })
+   it('verify  next button are working then navigate next page',()=>{
+    cy.intercept('POST', '/api/job-plan/preview*', {
+      statusCode: 200,
+      body: Array.from({length: 25}, (_, i) => ({
+        jobNo:`MO000${8758+i}`,description:`Test Job ${i}`,customer:'Test Customer',machine:'M5',colors:2,Qty:100,allocQty:50,uQty:50,
+        jobDate:'2026-01-01',deliveryDate:'2026-07-01',optimalDate:'2026-06-01',actualDate:null,model:'G',printType:'Screen',mColors:2,days:5,slots:10,util:80.5,pyramidAttach:0
+      }))
+    }).as('previewData')
+    cy.get('input[placeholder="Enter job no"]').should('be.visible').type('MO00008758')
+    cy.contains('button','Preview').should('be.visible').click()
+    cy.wait('@previewData')
+    cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
+    cy.get('[class*="next"], [aria-label="Next"], [class*="pagination"] > *:last-child').should('be.visible').click()
+    cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
 
-  
+  })
+  it('verify  Previous button are working then navigate Previous page',()=>{
+    cy.intercept('POST', '/api/job-plan/preview*', {
+      statusCode: 200,
+      body: Array.from({length: 25}, (_, i) => ({
+        jobNo:`MO000${8758+i}`,description:`Test Job ${i}`,customer:'Test Customer',machine:'M5',colors:2,Qty:100,allocQty:50,uQty:50,
+        jobDate:'2026-01-01',deliveryDate:'2026-07-01',optimalDate:'2026-06-01',actualDate:null,model:'G',printType:'Screen',mColors:2,days:5,slots:10,util:80.5,pyramidAttach:0
+      }))
+    }).as('previewData')
+    cy.get('input[placeholder="Enter job no"]').should('be.visible').type('MO00008758')
+    cy.contains('button','Preview').should('be.visible').click()
+    cy.wait('@previewData')
+    cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
+    cy.get('[class*="next"], [aria-label="Next"], [class*="pagination"] > *:last-child').should('be.visible').click()
+    cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
+     cy.get('[class*="previous"], [aria-label="Previous"], [class*="pagination"] > *:first-child').should('be.visible').click()
+    cy.get('table.job-table tbody tr',{timeout:15000}).should('have.length.greaterThan',0)
+
+  })
   
 })
