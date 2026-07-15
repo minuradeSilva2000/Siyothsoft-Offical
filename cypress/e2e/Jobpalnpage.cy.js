@@ -117,5 +117,9 @@ describe('Job Plan page Navigation Test Suite', () => {
      cy.get('input[type="date"]').eq(0).should('have.value','')
      cy.get('input[type="date"]').eq(1).should('have.value','')
   })
+  it('verify click the Go to Jobs button then navigate to jobs page',()=>{
+     cy.contains('button','Go to Jobs').should('be.visible').click()
+     cy.url().should('include','/jobs')
+  })
   
 })
