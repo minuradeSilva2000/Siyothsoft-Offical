@@ -2,7 +2,10 @@ Cypress.Commands.add('login', () => {
   cy.session('user-session', () => {
     cy.on('uncaught:exception', () => false)
     cy.intercept('**', (req) => {
-      req.headers['authorization'] = 'Basic ' + btoa('fl01:123456')
+      const hasAuth = Object.keys(req.headers || {}).some((k) => k.toLowerCase() === 'authorization')
+      if (!hasAuth) {
+        req.headers['authorization'] = 'Basic ' + btoa('fl01:123456')
+      }
     })
     cy.visit('/login', { failOnStatusCode: false })
     cy.get('input[placeholder="Enter your username"]', { timeout: 15000 }).should('be.visible').clear().type('fl01')

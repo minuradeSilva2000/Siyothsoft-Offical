@@ -10,8 +10,8 @@ describe('Customer page Navigation Test Suite', () => {
      
     cy.get('.navbar__hamburger',{timeout: 10000}).click()
     cy.get('.sidebar').should('be.visible')
-    cy.contains('Customer').should('be.visible')
-    cy.contains('Customer').click()
+    cy.get('.sidebar__item-text').contains('Customer').should('be.visible')
+    cy.get('.sidebar__item-text').contains('Customer').click()
     cy.contains('Manage Customers',{timeout:10000}).should('be.visible')
 
 })

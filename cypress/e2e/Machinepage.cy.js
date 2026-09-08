@@ -12,9 +12,9 @@ describe('Machine Module Test Suite', () => {
 
     cy.get('.sidebar').should('be.visible')
 
-    cy.contains('Machine').should('be.visible')
+    cy.get('.sidebar__item-text').contains('Machine').should('be.visible')
 
-    cy.contains('Machine').click()
+    cy.get('.sidebar__item-text').contains('Machine').click()
 
     cy.contains('Machine View', { timeout: 10000 }).should('be.visible')
 
@@ -196,7 +196,7 @@ describe('Machine Module Test Suite', () => {
 
     cy.contains('Print Types', { timeout: 10000 }).click({ force: true })
     cy.get('.machine-detail__slide.active').should('be.visible')
-    cy.xpath('/html/body/div/div/main/div/div[5]/div/div[1]/button').click()
+    cy.contains('button', '✕ Close').click({ force: true })
     cy.url().should('include', '/machines')
 
      
